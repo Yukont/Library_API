@@ -58,5 +58,12 @@ namespace Library_API.BLL.Services
             await unitOfWork.Book.UpdateAsync(updatedBook);
             unitOfWork.Save();
         }
+
+        public async Task<BookDTO> GetBookByISBN(string bookId)
+        {
+            Book book = await unitOfWork.Book.GetByISBNAsync(bookId);
+            BookDTO bookDto = mapper.Map<Book, BookDTO>(book);
+            return bookDto;
+        }
     }
 }

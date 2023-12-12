@@ -10,5 +10,17 @@ namespace Library_API.DAL.Repositories
         {
         }
 
+        public async Task<Book> GetByISBNAsync(string isbn)
+        {
+            var entity = await dbContext.Set<Book>().SingleOrDefaultAsync(a => a.Isbn.Equals(isbn));
+
+            if (entity == null)
+            {
+                throw new KeyNotFoundException($"Book with ISBN {isbn} not found.");
+            }
+
+            return entity;
+        }
+
     }
 }
