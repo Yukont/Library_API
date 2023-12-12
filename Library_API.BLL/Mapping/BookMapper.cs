@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Library_API.BLL.DTO;
+using Library_API.DAL.Entities;
 
 namespace Library_API.BLL.Mapping
 {
-    internal class BookMapper
+    public class BookMapper : BaseMapper<Book, BookDTO>
     {
     }
 }

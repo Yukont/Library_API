@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Library_API.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library_API;
+namespace Library_API.DAL.Context;
 
 public partial class LibraryApiContext : DbContext
 {

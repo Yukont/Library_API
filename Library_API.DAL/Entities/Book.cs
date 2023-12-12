@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Library_API;
+﻿namespace Library_API.DAL.Entities;
 
 public partial class Book
 {

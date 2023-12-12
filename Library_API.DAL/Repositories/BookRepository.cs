@@ -1,10 +1,6 @@
-﻿using Library_API.DAL.Interfaces;
+﻿using Library_API.DAL.Entities;
+using Library_API.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library_API.DAL.Repositories
 {
