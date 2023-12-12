@@ -13,6 +13,7 @@ namespace Library_API.BLL.Interfaces
         Task UpdateBook(BookDTO bookDto);
         Task RemoveBook(int bookId);
         Task<BookDTO> GetBookById(int bookId);
+        Task<BookDTO> GetBookByISBN(string bookId);
         Task<IEnumerable<BookDTO>> GetAllBook();
     }
 }
