@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 using System.Net;
-using Amazon.CodePipeline.Model;
-using ValidationException = FluentValidation.ValidationException;
+using FluentValidation;
 using System.Text.Json;
 using System.Reflection;
+
 
 namespace Library_API.Middleware
 {
@@ -31,6 +30,7 @@ namespace Library_API.Middleware
             httpContext.Response.ContentType = "application/json";
             int statusCode = (int)HttpStatusCode.InternalServerError;
             string message = "Internal server error";
+            message = exception.Message;
 
             if (exception is DbUpdateException)
             {
@@ -62,6 +62,11 @@ namespace Library_API.Middleware
                 statusCode = (int)HttpStatusCode.BadRequest;
                 message = "Ambiguous request: The request matched multiple endpoints";
             }
+            else if (exception is UnauthorizedAccessException)
+            {
+                statusCode = (int)HttpStatusCode.Unauthorized;
+                message = "Unauthorized access";
+            }
 
             httpContext.Response.StatusCode = statusCode;
 
@@ -70,5 +75,10 @@ namespace Library_API.Middleware
             await httpContext.Response.WriteAsync(json);
         }
 
+    }
+
+    public class ErrorDetails
+    {
+        public string Message { get; set; }
     }
 }
