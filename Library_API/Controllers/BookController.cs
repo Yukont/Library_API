@@ -1,11 +1,13 @@
 ﻿using Library_API.BLL.DTO;
 using Library_API.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_API.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/books")]
     public class BookController : Controller
     {
         private readonly IBookService bookService;
@@ -13,37 +15,37 @@ namespace Library_API.Controllers
         {
             this.bookService = bookService;
         }
-        [HttpGet("GetBooks")]
+        [HttpGet("books")]
         public async Task<ActionResult> GetBooks()
         {
             var books = await bookService.GetAllBook();
             return Ok(books);
         }
-        [HttpGet("GetBookById{id}")]
+        [HttpGet("book/{id}")]
         public async Task<ActionResult> GetBook(int id)
         {
             var book = await bookService.GetBookById(id);
             return Ok(book);
         }
-        [HttpGet("GetBookByISBN{ISBN}")]
+        [HttpGet("bookbyisbn/{ISBN}")]
         public async Task<ActionResult> GetBookByISBN(string ISBN)
         {
             var book = await bookService.GetBookByISBN(ISBN);
             return Ok(book);
         }
-        [HttpPost("CreateBook")]
+        [HttpPost("book")]
         public async Task<ActionResult> CreateBook(BookDTO bookDTO)
         {
             await bookService.AddBook(bookDTO);
             return Ok();
         }
-        [HttpPut("UpdateBook")]
+        [HttpPut("book")]
         public async Task<ActionResult> UpdateBook(BookDTO bookDTO)
         {
             await bookService.UpdateBook(bookDTO);
             return NoContent();
         }
-        [HttpDelete("DeleteBook{id}")]
+        [HttpDelete("book/{id}")]
         public async Task<ActionResult> DeleteBook(int id)
         {
             await bookService.RemoveBook(id);
